@@ -1,0 +1,1 @@
+{"version":3,"sources":["../index.es.js"],"names":[],"mappings":";;;;;;;;;AAAA","file":"index.es.js","sourcesContent":["import GreenMoney from \"./lib/GreenMoney\";\n\nexport default GreenMoney;\n\n"]}

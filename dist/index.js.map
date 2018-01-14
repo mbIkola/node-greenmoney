@@ -1,0 +1,1 @@
+{"version":3,"sources":["../index.js"],"names":["GreenMoney","require","module","exports"],"mappings":"AAAA,IAAMA,aAAaC,QAAQ,mBAAR,CAAnB;;AAEAC,OAAOC,OAAP,GAAiBH,UAAjB","file":"index.js","sourcesContent":["const GreenMoney = require('./dist/GreenMoney');\n\nmodule.exports = GreenMoney;\n"]}
