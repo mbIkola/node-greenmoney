@@ -1,7 +1,8 @@
 # node-greenmoney
 
-Simple lib to operate with  green.money eCheck API 
-Implemented only oneTimeDraftRTV call cuz this is enough for me currently;
+Simple lib to operate with  green.money eCheck API
+ 
+Implemented only oneTimeDraftRTV call cuz it's enough for me currently;
 
 # Why (Motivation)
 ```
@@ -40,6 +41,20 @@ But your loving don't pay my bills
  });
 ```
 
-Transpiled version stored to `./dist`; 
-Demo form powered by bootstrap + express/ejs in `./demo`  
+```javascript
+.
+├── demo                   Demo Website powered by express + ejs + bootstrap4 (just one simple form)
+├── dist                   Transpiled ES6 to something more usual  
+├── docs
+│   └── API_eCheck.pdf     Doc from green.money (Exclusive shit!!)
+├── index.es.js            Entry point 
+├── index.js               Yet another entry point
+├── lib
+│   ├── GreenMoney.js      A Small -shit- piece of code 
+│   └── utils.js           
+├── LICENSE                Do whatever the fuck you want. 
+├── package.json
+├── package-lock.json
+└── README.md              This fule 
 
+```
