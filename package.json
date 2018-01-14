@@ -1,0 +1,44 @@
+{
+  "name": "greenmoney",
+  "version": "1.0.0",
+  "description": "Simple lib to operate with green.money eCheck API.",
+  "main": "index.js",
+  "jsnext:main": "index.es.js",
+  "module": "index.es.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbIkola/node-greenmoney.git"
+  },
+  "keywords": [
+    "green.money",
+    "echeck",
+    "money",
+    "greenmoney",
+    "bullshit",
+    "стояделали-половинавытекла",
+    "мойинвесторидиот"
+  ],
+  "author": "Nickolay \"mbIkola\" Kharchevin <kharchevyn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mbIkola/node-greenmoney/issues"
+  },
+  "homepage": "https://github.com/mbIkola/node-greenmoney#readme",
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.37",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.37",
+    "@babel/polyfill": "^7.0.0-beta.37",
+    "@babel/preset-env": "^7.0.0-beta.37",
+    "@babel/register": "^7.0.0-beta.37",
+    "@babel/runtime": "^7.0.0-beta.37"
+  },
+  "dependencies": {
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5",
+    "us-states": "0.0.1",
+    "xml2js": "^0.4.19"
+  }
+}
