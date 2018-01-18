@@ -21,7 +21,8 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _utils = require("./utils");
 
-var request = require('request-promise-native');
+var request = require('request-promise-native'); //request.debug = true;
+
 
 var usps = require('us-states');
 
@@ -114,6 +115,7 @@ function () {
         accountNumber: accountNumber,
         bankName: bankName
       };
+      console.log("Opts: ", opts);
       (0, _keys.default)(opts).forEach(function (name) {
         return (0, _utils.validateNotEmpty)(name, opts[name]);
       });
@@ -142,7 +144,11 @@ function () {
       formData.ApiPassword = this.apiPassword;
       return request.post({
         url: this.apiUrl,
-        formData: formData
+        form: formData,
+        headers: {
+          'Accept': 'application/xml'
+        },
+        resolveWithFullResponse: true
       }).then(function (response) {
         return _this.formatResponseBody(response);
       }).then(function (body) {
@@ -154,9 +160,14 @@ function () {
     value: function formatResponseBody(response) {
       if (response.status >= 400) {
         throw new Error(response.statusText);
+      } //console.log("GreenMoney Response;", response, response.body);
+
+
+      if (/Request Rejected/.test(response.body)) {
+        console.log("GreenMoney Request rejected:", response.body);
+        throw new Error(response.body);
       }
 
-      console.log(response.body);
       return new xml2js(response.body);
     }
   }]);
@@ -165,6 +176,82 @@ function () {
 
 var _default = GreenMoney;
 exports.default = _default; //# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
+//# sourceMappingURL=GreenMoney.js.map
 //# sourceMappingURL=GreenMoney.js.map
 //# sourceMappingURL=GreenMoney.js.map
 //# sourceMappingURL=GreenMoney.js.map
