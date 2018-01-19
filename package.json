@@ -38,11 +38,12 @@
     "@babel/preset-env": "^7.0.0-beta.37",
     "@babel/register": "^7.0.0-beta.37",
     "@babel/runtime": "^7.0.0-beta.37",
-    "ejs-locals": "^1.0.2",
     "express": "^4.16.2",
     "opn": "^5.2.0"
   },
   "dependencies": {
+    "ejs": "^2.5.7",
+    "ejs-locals": "^1.0.2",
     "request": "^2.83.0",
     "request-debug": "^0.2.0",
     "request-promise-native": "^1.0.5",
