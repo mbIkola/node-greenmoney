@@ -1,3 +1,3 @@
 const GreenMoney = require('./dist/GreenMoney');
 
-module.exports = GreenMoney;
+module.exports = GreenMoney.default;

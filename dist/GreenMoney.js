@@ -66,8 +66,15 @@ function () {
 var GreenMoney =
 /*#__PURE__*/
 function () {
-  function GreenMoney(clientId, apiPassword) {
+  function GreenMoney(clientId, apiPassword, debug) {
     (0, _classCallCheck2.default)(this, GreenMoney);
+
+    if (debug) {
+      request.debug = true;
+
+      require('request-debug')(request);
+    }
+
     this.clientId = clientId;
     this.apiPassword = apiPassword;
     this.apiUrl = 'https://www.greenbyphone.com/eCheck.asmx';
@@ -145,12 +152,9 @@ function () {
       formData.ApiPassword = this.apiPassword;
       return request.post({
         url: this.apiUrl,
-        form: formData,
-        headers: {
-          'Accept': 'application/xml'
-        },
-        resolveWithFullResponse: true
-      }).then(function (response) {
+        resolveWithFullResponse: true,
+        simple: false
+      }).form(formData).then(function (response) {
         return _this.formatResponseBody(response);
       }).then(function (body) {
         return new DraftResponse(body);
@@ -176,5 +180,4 @@ function () {
 }();
 
 var _default = GreenMoney;
-exports.default = _default; //# sourceMappingURL=GreenMoney.js.map
-//# sourceMappingURL=GreenMoney.js.map
+exports.default = _default;

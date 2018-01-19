@@ -43,7 +43,7 @@ But your loving don't pay my bills
 
 ```javascript
 .
-├── demo                   Demo Website powered by express + ejs + bootstrap4 (just one simple form)
+├── demo                   Demo Website powered by express + ejs + bootstrap3 (just one simple form)
 ├── dist                   Transpiled ES6 to something more usual  
 ├── docs
 │   └── API_eCheck.pdf     Doc from green.money (Exclusive shit!!)
