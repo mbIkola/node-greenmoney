@@ -7,13 +7,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
+var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
 
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
 var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
 
 var _assign = _interopRequireDefault(require("@babel/runtime/core-js/object/assign"));
+
+var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
@@ -33,15 +35,19 @@ var DraftResponse =
 function () {
   function DraftResponse(params) {
     (0, _classCallCheck2.default)(this, DraftResponse);
-    this.Result = undefined;
-    this.ResultDescription = undefined;
-    this.VerifyResult = undefined;
-    this.VerifyResyltDescription = undefined;
-    this.CheckNumber = undefined;
-    this.Check_ID = undefined;
+    this.Result = params.Result;
+    this.ResultDescription = params.ResultDescription;
+    this.VerifyResult = params.VerifyResult;
+    this.VerifyResultDescription = params.VerifyResultDescription;
+    this.CheckNumber = params.CheckNumber;
+    this.Check_ID = params.Check_ID;
 
-    for (var x in params.DraftResult) {
-      this[x] = params.DraftResult[x];
+    var _arr = (0, _keys.default)(this);
+
+    for (var _i = 0; _i < _arr.length; _i++) {
+      var x = _arr[_i];
+      console.log(x, this[x]);
+      this[x] = Array.isArray(this[x]) ? this[x].join(';') : this[x];
     }
 
     this.original = params;
@@ -53,6 +59,11 @@ function () {
       var res = (0, _assign.default)({}, this);
       delete res.original;
       return res;
+    }
+  }, {
+    key: "isSuccess",
+    value: function isSuccess() {
+      return "Who knows?";
     }
   }, {
     key: "toJSON",
@@ -75,9 +86,10 @@ function () {
       require('request-debug')(request);
     }
 
+    this.debug = debug || false;
     this.clientId = clientId;
     this.apiPassword = apiPassword;
-    this.apiUrl = 'https://www.greenbyphone.com/eCheck.asmx';
+    this.apiUrl = 'https://www.greenbyphone.com/eCheck.asmx/';
   }
   /**
    * ONETIMEDRAFTRTV – ONE-TIME DRAFT REAL-TIME VERIFICATION
@@ -123,7 +135,7 @@ function () {
         bankName: bankName,
         checkAmount: checkAmount
       };
-      console.log("Opts: ", opts);
+      if (this.debug) console.log("Opts: ", opts);
       (0, _keys.default)(opts).forEach(function (name) {
         return (0, _utils.validateNotEmpty)(name, opts[name]);
       });
@@ -139,6 +151,15 @@ function () {
         return (0, _utils.validateRegExp)(name, rules[name], opts[name]);
       });
       (0, _utils.validateUSPSState)(opts.state);
+      additionalOpts = (0, _assign.default)({
+        EmailAddress: 'kharchevyn@gmail.com',
+        CheckMemo: '',
+        CheckDate: '',
+        CheckNumber: '',
+        PhoneExtension: '',
+        Country: 'US',
+        Address2: ''
+      }, additionalOpts || {});
       opts = (0, _extends2.default)({}, opts, additionalOpts);
       return this.apiCall('OneTimeDraftRTV', opts);
     }
@@ -150,8 +171,10 @@ function () {
       var formData = (0, _utils.capitalizeFirstCharAtKeys)(params);
       formData.Client_ID = this.clientId;
       formData.ApiPassword = this.apiPassword;
+      formData.x_delim_data = '';
+      formData.x_delim_char = '';
       return request.post({
-        url: this.apiUrl,
+        url: this.apiUrl + method,
         resolveWithFullResponse: true,
         simple: false
       }).form(formData).then(function (response) {
@@ -169,11 +192,20 @@ function () {
 
 
       if (/Request Rejected/.test(response.body)) {
-        console.log("GreenMoney Request rejected:", response.body);
+        if (this.debug) console.log("GreenMoney Request rejected:", response.body);
         throw new Error(response.body);
       }
 
-      return new xml2js(response.body);
+      return new _promise.default(function (resolve, reject) {
+        xml2js(response.body, function (err, result) {
+          if (err) {
+            console.error("Could not parse XML:".err);
+            reject(err);
+          }
+
+          resolve(result.DraftResult);
+        });
+      });
     }
   }]);
   return GreenMoney;

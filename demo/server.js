@@ -10,7 +10,7 @@ const Greenmoney = require('../index.js');
 const GREENMONEY_CLIENT_ID = "ClientID";
 const GREENMONEY_API_PASSWORD="APIPassword";
 
-const greenmoney = new Greenmoney(GREENMONEY_CLIENT_ID, GREENMONEY_API_PASSWORD, true);
+const greenmoney = new Greenmoney('107609', 'dq9ho8js6hw', true);
 
 app.engine('ejs', require('ejs-locals'));
 app.set('views', __dirname);
@@ -28,10 +28,19 @@ app.post('/', (req, res) => {
 
   greenmoney.oneTimeDraftRTV(
     req.body.name, req.body.phone, req.body.address1, req.body.city, req.body.state,
-    req.body.zip, req.body.routingNumber, req.body.accountNumber, req.body.bankName, req.body.checkAmount
+    req.body.zip, req.body.routingNumber, req.body.accountNumber, req.body.bankName, req.body.checkAmount,
+    {
+      EmailAddress : req.body.email || '',
+      CheckMemo: req.body.checkMemo || '',
+      CheckDate: '',
+      CheckNumber: '',
+      PhoneExtension: '',
+      Country: 'US' ,
+      Address2: req.body.address2 || '',
+    }
   ).then((e) => {
     console.log("Success:::", e);
-    res.status(200).json(e);
+    res.status(200).json(e.toObject());
   })
   .catch(err => {
     console.error("Form Rejected," + err.message);
