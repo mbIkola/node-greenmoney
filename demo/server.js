@@ -10,7 +10,7 @@ const Greenmoney = require('../index.js');
 const GREENMONEY_CLIENT_ID = "ClientID";
 const GREENMONEY_API_PASSWORD="APIPassword";
 
-const greenmoney = new Greenmoney('107609', 'dq9ho8js6hw', true);
+const greenmoney = new Greenmoney(CLIENT_ID, CLIENT_PASSWORD, true);
 
 app.engine('ejs', require('ejs-locals'));
 app.set('views', __dirname);
@@ -58,6 +58,6 @@ server.listen(port, host);
 server.on('listening', () => {
   console.log("Open your browser on http://" + host + ":" + port + "/ and enjoy");
   const url = "http://" + host + ":" + port + "/";
-  opn(url);
+  //opn(url);
 });
 server.on('error', (err) => console.error(err) );
