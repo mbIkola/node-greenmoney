@@ -151,10 +151,12 @@ function () {
         return (0, _utils.validateRegExp)(name, rules[name], opts[name]);
       });
       (0, _utils.validateUSPSState)(opts.state);
+      var d = new Date();
+      todayDate = ('0' + d.getDate()).substr(-2) + '/' + ('0' + (d.getMonth() + 1)).substr(-2) + '/' + d.getFullYear();
       additionalOpts = (0, _assign.default)({
-        EmailAddress: 'kharchevyn@gmail.com',
+        EmailAddress: '',
         CheckMemo: '',
-        CheckDate: '',
+        CheckDate: todayDate,
         CheckNumber: '',
         PhoneExtension: '',
         Country: 'US',
