@@ -7,15 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _promise = _interopRequireDefault(require("@babel/runtime/core-js/promise"));
-
-var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
-
-var _stringify = _interopRequireDefault(require("@babel/runtime/core-js/json/stringify"));
-
-var _assign = _interopRequireDefault(require("@babel/runtime/core-js/object/assign"));
-
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
@@ -42,7 +34,7 @@ function () {
     this.CheckNumber = params.CheckNumber;
     this.Check_ID = params.Check_ID;
 
-    var _arr = (0, _keys.default)(this);
+    var _arr = Object.keys(this);
 
     for (var _i = 0; _i < _arr.length; _i++) {
       var x = _arr[_i];
@@ -56,7 +48,7 @@ function () {
   (0, _createClass2.default)(DraftResponse, [{
     key: "toObject",
     value: function toObject() {
-      var res = (0, _assign.default)({}, this);
+      var res = Object.assign({}, this);
       delete res.original;
       return res;
     }
@@ -68,7 +60,7 @@ function () {
   }, {
     key: "toJSON",
     value: function toJSON() {
-      return (0, _stringify.default)(this.toObject());
+      return JSON.stringify(this.toObject());
     }
   }]);
   return DraftResponse;
@@ -136,7 +128,7 @@ function () {
         checkAmount: checkAmount
       };
       if (this.debug) console.log("Opts: ", opts);
-      (0, _keys.default)(opts).forEach(function (name) {
+      Object.keys(opts).forEach(function (name) {
         return (0, _utils.validateNotEmpty)(name, opts[name]);
       });
       checkAmount = (checkAmount * 100 | 0) / 100.0;
@@ -147,13 +139,13 @@ function () {
         phone: /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/,
         state: /^[a-zA-Z]{2}$/
       };
-      (0, _keys.default)(rules).forEach(function (name) {
+      Object.keys(rules).forEach(function (name) {
         return (0, _utils.validateRegExp)(name, rules[name], opts[name]);
       });
       (0, _utils.validateUSPSState)(opts.state);
       var d = new Date();
       var todayDate = ('0' + d.getDate()).substr(-2) + '/' + ('0' + (d.getMonth() + 1)).substr(-2) + '/' + d.getFullYear();
-      additionalOpts = (0, _assign.default)({
+      additionalOpts = Object.assign({
         EmailAddress: '',
         CheckMemo: '',
         CheckDate: todayDate,
@@ -162,7 +154,7 @@ function () {
         Country: 'US',
         Address2: ''
       }, additionalOpts || {});
-      opts = (0, _extends2.default)({}, opts, additionalOpts);
+      opts = (0, _objectSpread2.default)({}, opts, additionalOpts);
       return this.apiCall('OneTimeDraftRTV', opts);
     }
   }, {
@@ -198,7 +190,7 @@ function () {
         throw new Error(response.body);
       }
 
-      return new _promise.default(function (resolve, reject) {
+      return new Promise(function (resolve, reject) {
         xml2js(response.body, function (err, result) {
           if (err) {
             console.error("Could not parse XML:".err);

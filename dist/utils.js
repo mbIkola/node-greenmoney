@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -11,8 +9,6 @@ exports.validateRegExp = validateRegExp;
 exports.validateUSPSState = validateUSPSState;
 exports.ucFirst = ucFirst;
 exports.capitalizeFirstCharAtKeys = capitalizeFirstCharAtKeys;
-
-var _keys = _interopRequireDefault(require("@babel/runtime/core-js/object/keys"));
 
 var usps = require('us-states');
 
@@ -45,7 +41,7 @@ function ucFirst(str) {
 }
 
 function capitalizeFirstCharAtKeys(params) {
-  return (0, _keys.default)(params).map(function (key) {
+  return Object.keys(params).map(function (key) {
     return [ucFirst(key), params[key]];
   }).reduce(function (acc, current) {
     acc[current[0]] = current[1];
